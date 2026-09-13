@@ -1,0 +1,88 @@
+name: OS Lab - Assignment 4
+
+on:
+  workflow_dispatch:
+    inputs:
+      program:
+        description: "Select the program to run"
+        required: true
+        type: choice
+        options:
+          - q1.sh
+          - q2.sh
+          - q3.sh
+          - q4.sh
+          - q5.sh
+
+      input1:
+        description: "Input 1"
+        required: true
+        type: string
+
+      input2:
+        description: "Input 2"
+        required: false
+        type: string
+
+      input3:
+        description: "Input 3"
+        required: false
+        type: string
+
+      input4:
+        description: "Input 4"
+        required: false
+        type: string
+
+jobs:
+  run-program:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install bc
+        run: sudo apt-get update && sudo apt-get install -y bc
+
+      - name: Run selected program
+        env:
+          PROGRAM: ${{ inputs.program }}
+          INPUT1: ${{ inputs.input1 }}
+          INPUT2: ${{ inputs.input2 }}
+          INPUT3: ${{ inputs.input3 }}
+          INPUT4: ${{ inputs.input4 }}
+        run: |
+          case "$PROGRAM" in
+
+            q1.sh)
+              printf '%s\n' "$INPUT1" "$INPUT2" "$INPUT3" "$INPUT4" |
+                bash "Assignment_4/q1.sh"
+              ;;
+
+            q2.sh)
+              printf '%s\n' "$INPUT1" "$INPUT2" |
+                bash "Assignment_4/q2.sh"
+              ;;
+
+            q3.sh)
+              printf '%s\n' "$INPUT1" "$INPUT2" |
+                bash "Assignment_4/q3.sh"
+              ;;
+
+            q4.sh)
+              printf '%s\n' "$INPUT1" "$INPUT2" |
+                bash "Assignment_4/q4.sh"
+              ;;
+
+            q5.sh)
+              printf '%s\n' "$INPUT1" |
+                bash "Assignment_4/q5.sh"
+              ;;
+
+            *)
+              echo "Invalid program selected."
+              exit 1
+              ;;
+
+          esac
