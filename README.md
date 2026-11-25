@@ -9,6 +9,12 @@
 
 ---
 
+## Course information
+
+- **Subject:** Operating Systems Laboratory
+- **Subject Code:** `PCC-DS-591`
+- **Institute:** Haldia Institute of Technology
+
 ## About
 
 This repository contains Bash shell programs completed as part of the Operating Systems Laboratory. It includes practice with shell input/output, arithmetic operations, conditional statements, loops, character handling, and basic problem-solving.
