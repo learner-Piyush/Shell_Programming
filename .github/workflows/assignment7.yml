@@ -1,0 +1,37 @@
+
+name: OS Lab - Assignment 7 (Q1-Q5)
+
+on:
+  workflow_dispatch:
+    inputs:
+      program:
+        description: "Select the program to run"
+        required: true
+        type: choice
+        options:
+          - q1.sh
+          - q2.sh
+          - q3.sh
+          - q4.sh
+          - q5.sh
+
+      input1:
+        description: "Enter the required number or term"
+        required: true
+        type: string
+
+jobs:
+  run-program:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run selected program
+        env:
+          PROGRAM: ${{ inputs.program }}
+          INPUT1: ${{ inputs.input1 }}
+        run: |
+          printf '%s\n' "$INPUT1" |
+            bash "Assignment_7/$PROGRAM"
